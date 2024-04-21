@@ -10,6 +10,9 @@ import json
 
 from ansible.module_utils.common.text.converters import to_native, to_text
 from ansible.module_utils.urls import fetch_url
+import logging
+
+logger = logging.get_logger(__name__)
 
 
 class GandiLiveDNSAPI(object):
@@ -117,6 +120,7 @@ class GandiLiveDNSAPI(object):
                 url += '/%s' % (type)
 
         records, status = self._gandi_api_call(url, error_on_404=False)
+        logger.info(records)
         print(records)
         if status == 404:
             return []
