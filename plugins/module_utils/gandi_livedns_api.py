@@ -117,7 +117,7 @@ class GandiLiveDNSAPI(object):
                 url += '/%s' % (type)
 
         records, status = self._gandi_api_call(url, error_on_404=False)
-
+        print(records)
         if status == 404:
             return []
 
@@ -197,7 +197,6 @@ class GandiLiveDNSAPI(object):
             cur_record = records[0]
 
             do_update = False
-            self.module.fail_json(msg=records)
             if ttl is not None and cur_record['rrset_ttl'] != ttl:
                 do_update = True
             if values is not None and set(cur_record['rrset_values']) != set(values):
