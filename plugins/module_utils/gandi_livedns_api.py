@@ -12,6 +12,7 @@ from ansible.module_utils.common.text.converters import to_native, to_text
 from ansible.module_utils.urls import fetch_url
 import logging
 
+logging.basicConfig(filename='/tmp/ansible_log.log', level=logging.DEBUG)
 logger = logging.getLogger(__name__)
 
 
@@ -67,7 +68,9 @@ class GandiLiveDNSAPI(object):
                                headers=headers,
                                data=data,
                                method=method)
-
+        logger.info("Fetched")
+        logger.debug(info)
+        logger.debug(resp)
         error_msg = ''
         if info['status'] >= 400 and (info['status'] != 404 or error_on_404):
             err_s = self.error_strings.get(info['status'], '')
@@ -88,7 +91,8 @@ class GandiLiveDNSAPI(object):
 
         if error_msg:
             self.module.fail_json(msg=error_msg)
-
+        logger.debug(result)
+        logger.debug("Done fetch, returning")
         return result, info['status']
 
     def build_result(self, result, domain):
