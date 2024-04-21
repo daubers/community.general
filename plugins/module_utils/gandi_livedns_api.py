@@ -12,7 +12,7 @@ from ansible.module_utils.common.text.converters import to_native, to_text
 from ansible.module_utils.urls import fetch_url
 import logging
 
-logger = logging.get_logger(__name__)
+logger = logging.getLogger(__name__)
 
 
 class GandiLiveDNSAPI(object):
