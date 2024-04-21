@@ -50,7 +50,7 @@ class GandiLiveDNSAPI(object):
         return s
 
     def _gandi_api_call(self, api_call, method='GET', payload=None, error_on_404=True):
-        headers = {'Authorization': 'Apikey {0}'.format(self.api_key),
+        headers = {'Authorization': 'Bearer {0}'.format(self.api_key),
                    'Content-Type': 'application/json'}
         data = None
         if payload:
